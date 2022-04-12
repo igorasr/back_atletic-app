@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  api:
+    build: ./
+    container_name: api_atletic_app
+    ports:
+      - '8080:8080'
+    volumes:
+      - '.:/app'
+    command: 'npm start'
+    networks:
+      - intra-network
+    depends_on:
+      - database
+
+  database:
+    image: mysql
+    container_name: db_atletic_app
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=XVzhtsIP
+    networks:
+      - intra-network
+
+
+networks:
+  intra-network:
+    driver: bridge
+
+
+    
